@@ -1,0 +1,58 @@
+plugins {
+    id "org.sonarqube" version "4.4.1.3373"
+}
+
+allprojects {
+    apply plugin: 'base'
+    apply plugin: 'jacoco'
+
+    repositories {
+        mavenCentral()
+    }
+
+    jacoco {
+        toolVersion = '0.8.11'
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    group 'org.scrum.psd.battleship'
+    version '1.0.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+
+    dependencies {
+        testImplementation 'org.slf4j:slf4j-api:2.0.12',
+                'io.cucumber:cucumber-junit:7.15.0',
+                'io.cucumber:cucumber-java:7.15.0',
+                'org.jacoco:org.jacoco.ant:0.8.11',
+                'org.junit.jupiter:junit-jupiter-api:5.10.2'
+
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2',
+                'org.junit.vintage:junit-vintage-engine:5.10.2'
+
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.required = true
+        }
+    }
+}
+
+task copyTestResults {
+    doLast {
+        copy {
+            from fileTree('.').files
+            into 'build/test-results'
+            include 'TEST-*.xml'
+        }
+    }
+}

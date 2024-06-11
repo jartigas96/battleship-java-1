@@ -1,0 +1,29 @@
+image: amazoncorretto:17
+
+stages: 
+  - test
+  - build
+  - analyze
+
+cache: 
+  paths: 
+    - .gradle/
+
+unit test:
+  stage: test
+  script:
+    - ./gradlew test jacocoTestReport
+
+build:
+  stage: build
+  script:
+    - ./gradlew build
+  artifacts:
+    paths:
+      - ./console-app/build/distributions
+
+sonar:
+  stage: analyze
+  script:
+  - ./gradlew sonarqube -Dsonar.host.url=$$$SONAR_URL$$$ -Dsonar.projectKey=$$$SONAR_PROJECT_KEY$$$ -Dsonar.projectName=$$$SONAR_PROJECT_KEY$$$ -Dsonar.login=$$$SONAR_LOGIN$$$
+
