@@ -90,24 +90,25 @@ public class Main {
             }
             if(isHit){
                 listPlayer1Hit.add(position);
-
             }else {
                 listPlayer1Miss.add(position);
             }
+            Map<String, Boolean> mapToPlayer = new HashMap();
+            for (Position lHit : listPlayer1Hit) {
+                String p = lHit.getColumn().name().toUpperCase() + lHit.getRow();
+                mapToPlayer.put(p, lHit.getIsHit());
+            }
+            for (Position lMiss : listPlayer1Miss) {
+                String p = lMiss.getColumn().name().toUpperCase() + lMiss.getRow();
+                mapToPlayer.put(p, lMiss.getIsHit());
+            }
+            
+            System.out.println(GameController.getTable(mapToPlayer));
             System.out.println(isHit ? colorize("Yeah ! Nice hit !", GREEN_TEXT()) : colorize("Miss", CYAN_TEXT()));
             telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
             
 
             System.out.println("---------------------------------------------------------");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
             System.out.println("");
             System.out.println("");
             System.out.println("");
@@ -131,17 +132,6 @@ public class Main {
 
             }
             System.out.println("---------------------------------------------------------");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
             System.out.println("");
             System.out.println("");
             System.out.println("");
@@ -169,9 +159,25 @@ public class Main {
         return position;
     }
 
-    private static void InitializeGame() {
-        InitializeMyFleet();
+    private static void DebugInitializeMyFleet() {
+        myFleet = GameController.initializeShips();
+      
+        System.out.println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
+      
+        for (Ship ship : myFleet) {
+          System.out.println("");
+          System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
+          for (int i = 1; i <= ship.getSize(); i++) {
+            Position position = new Position(Letter.A, 1);
+            ship.addPosition("A1");
+            telemetry.trackEvent("Player_PlaceShipPosition", "Position", "A1", "Ship", ship.getName(), "PositionInShip", Integer.valueOf(i).toString());
+          }
+        }
+      }
 
+    private static void InitializeGame() {
+        //InitializeMyFleet();
+        DebugInitializeMyFleet();
         InitializeEnemyFleet();
     }
 

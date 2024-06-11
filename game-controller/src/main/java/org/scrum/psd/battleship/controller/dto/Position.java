@@ -24,7 +24,7 @@ public class Position {
         this.column = column;
     }
 
-    public Letter getIsHit() {
+    public boolean getIsHit() {
         return isHit;
     }
 

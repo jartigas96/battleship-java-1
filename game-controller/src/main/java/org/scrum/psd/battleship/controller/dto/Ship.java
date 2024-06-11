@@ -36,6 +36,19 @@ public class Ship {
         this.color = color;
     }
 
+    public boolean getStatusShip(){
+        boolean allHit = true;
+        for (Position position : positions) {
+            if(!position.getIsHit()){
+                allHit = false;
+            }
+        }
+        if(allHit){
+            setIsSunk(allHit);
+        }
+
+        return allHit;
+    }
 
     public void setIsSunk(boolean sunk){
         this.isSunk = sunk;
