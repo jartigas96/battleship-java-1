@@ -53,9 +53,26 @@ public class Main {
         System.out.println("   \\    \\_/");
         System.out.println("    \" \"\" \"\" \"\" \"");
 
+        List<Position> listPlayer1Hit = new ArrayList();
+        List<Position> listPlayer1Miss = new ArrayList();
+
         do {
             System.out.println("");
             System.out.println("Player, it's your turn");
+            if(listPlayer1Hit.size()>0){
+                String valores = "";
+                for (Position l : listPlayer1Hit) {
+                    valores+= (String.valueOf(l.getRow()) + String.valueOf( l.getColumn())+ ",");
+                }
+                System.out.println("Posicion barcos tocados: " + valores);
+            }
+            if(listPlayer1Miss.size()>0){
+                String valores = "";
+                for (Position l : listPlayer1Miss) {
+                    valores+= (String.valueOf(l.getRow()) + String.valueOf( l.getColumn())+ ",");
+                }
+                System.out.println("Posicion barcos fallados: " + valores);
+            }
             System.out.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
@@ -71,14 +88,34 @@ public class Main {
                 System.out.println("                 -\\  \\     /  /-");
                 System.out.println("                   \\  \\   /  /");
             }
+            if(isHit){
+                listPlayer1Hit.add(position);
 
-            System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            }else {
+                listPlayer1Miss.add(position);
+            }
+            System.out.println(isHit ? colorize("Yeah ! Nice hit !", GREEN_TEXT()) : colorize("Miss", CYAN_TEXT()));
             telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
+            
 
+            System.out.println("---------------------------------------------------------");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("--------------------------------------------------------");
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
             System.out.println("");
-            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? colorize("hit your ship !", RED_TEXT()) : colorize("Miss", CYAN_TEXT())));
             telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
             if (isHit) {
                 beep();
@@ -93,6 +130,22 @@ public class Main {
                 System.out.println("                   \\  \\   /  /");
 
             }
+            System.out.println("---------------------------------------------------------");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("--------------------------------------------------------");
         } while (true);
     }
 
