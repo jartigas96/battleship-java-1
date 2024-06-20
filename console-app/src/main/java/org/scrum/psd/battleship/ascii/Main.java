@@ -251,8 +251,8 @@ public class Main {
   }
 
   private static void InitializeGame() {
-    //InitializeMyFleet();
-    DebugInitializeMyFleet();
+    InitializeMyFleet();
+    //DebugInitializeMyFleet();
     InitializeEnemyFleet();
   }
 
@@ -283,23 +283,19 @@ public class Main {
     enemyFleet.get(0).getPositions().add(new Position(Letter.B, 6));
     enemyFleet.get(0).getPositions().add(new Position(Letter.B, 7));
     enemyFleet.get(0).getPositions().add(new Position(Letter.B, 8));
-    enemyFleet.get(0).setIsSunk(true);
 
+    enemyFleet.get(1).getPositions().add(new Position(Letter.E, 5));
     enemyFleet.get(1).getPositions().add(new Position(Letter.E, 6));
     enemyFleet.get(1).getPositions().add(new Position(Letter.E, 7));
     enemyFleet.get(1).getPositions().add(new Position(Letter.E, 8));
-    enemyFleet.get(1).getPositions().add(new Position(Letter.E, 9));
-    enemyFleet.get(1).setIsSunk(true);
 
     enemyFleet.get(2).getPositions().add(new Position(Letter.A, 3));
     enemyFleet.get(2).getPositions().add(new Position(Letter.B, 3));
     enemyFleet.get(2).getPositions().add(new Position(Letter.C, 3));
-    enemyFleet.get(2).setIsSunk(true);
 
     enemyFleet.get(3).getPositions().add(new Position(Letter.F, 8));
     enemyFleet.get(3).getPositions().add(new Position(Letter.G, 8));
     enemyFleet.get(3).getPositions().add(new Position(Letter.H, 8));
-    enemyFleet.get(3).setIsSunk(true);
 
     enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
     enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
